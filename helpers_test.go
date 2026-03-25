@@ -124,15 +124,3 @@ func sumDurations(durs []time.Duration) time.Duration {
 	}
 	return sum
 }
-
-func postItemRaw(t *testing.T, payload interface{}) *http.Response {
-	body, _ := json.Marshal(payload)
-	resp, err := http.Post(baseURL+"/api/1/item", "application/json", strings.NewReader(string(body)))
-	require.NoError(t, err)
-	return resp
-}
-
-func mustMarshal(v interface{}) []byte {
-	b, _ := json.MarshalIndent(v, "", "  ")
-	return b
-}

@@ -1,0 +1,45 @@
+linters:
+  enable:
+    - govet
+    - errcheck
+    - staticcheck
+    - unused
+    - gosimple
+    - ineffassign
+    - typecheck
+    - gofmt
+    - goimports
+    - misspell
+    - revive
+    - gocritic
+    - stylecheck
+    - unconvert
+    - unparam
+
+linters-settings:
+  gofmt:
+    simplify: true
+  goimports:
+    local-prefixes: api_testing
+  misspell:
+    locale: US
+  revive:
+    rules:
+      - name: exported
+        severity: warning
+        disabled: false
+
+run:
+  timeout: 5m
+  tests: true
+  skip-dirs:
+    - allure-results
+    - allure-report
+
+issues:
+  exclude-rules:
+    - path: _test\.go
+      linters:
+        - errcheck
+        - unparam
+        - revive

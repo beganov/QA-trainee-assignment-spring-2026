@@ -1,0 +1,6 @@
+services:
+  tests:
+    build: .
+    volumes:
+      - ./allure-results:/app/allure-results
+      - ./allure-report:/app/allure-report

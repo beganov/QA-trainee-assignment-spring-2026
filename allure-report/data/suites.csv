@@ -1,0 +1,2 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Wed Mar 25 20:21:22 UTC 2026","Wed Mar 25 20:21:22 UTC 2026","292","","TestE2E_ItemAfterDelete_Allure","","","","После удаления GET /item/{id} возвращает 404","Создаётся объявление, удаляется, затем проверяется, что по его ID возвращается 404 Not Found."

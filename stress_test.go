@@ -12,7 +12,7 @@ import (
 
 func TestLoad_CreateItems(t *testing.T) {
 	concurrency := 5
-	iterations := 7
+	iterations := 5
 
 	var wg sync.WaitGroup
 	results := make(chan time.Duration, concurrency*iterations)

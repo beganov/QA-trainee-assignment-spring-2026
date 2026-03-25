@@ -53,7 +53,6 @@ func TestE2E_ItemAfterDelete_Allure(t *testing.T) {
 				},
 			}
 
-			// Прикрепляем вложение
 			if reqBody, err := json.MarshalIndent(payload, "", "  "); err == nil {
 				sCtx.WithNewAttachment("Запрос POST", "application/json", reqBody)
 			}
@@ -79,7 +78,7 @@ func TestE2E_ItemAfterDelete_Allure(t *testing.T) {
 		defer deleteItem(origT, uuid)
 	})
 }
-func TestE2E_DuplicateFieldsDifferentCase(t *testing.T) {
+func TestE2E_DuplicateFieldsDifferentCase(t *testing.T) { // падает в силу бага BR-3
 	sellerIDCorrect := rand.Intn(999999-111111+1) + 111111
 	sellerIDWrong := sellerIDCorrect + 1
 	nameCorrect := randomString(10, latinicLower)

@@ -1,4 +1,4 @@
-FROM golang:1.21
+FROM golang:1.23
 
 RUN apt-get update && apt-get install -y wget unzip openjdk-17-jre-headless && rm -rf /var/lib/apt/lists/*
 
@@ -13,4 +13,6 @@ WORKDIR /app
 COPY . .
 RUN go mod download
 
-CMD ["sh", "-c", "go test ./... -v && allure generate allure-results --clean -o allure-report"]
+RUN go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+
+CMD ["sh", "-c", "go test ./... -v ; allure generate allure-results --clean -o allure-report"]

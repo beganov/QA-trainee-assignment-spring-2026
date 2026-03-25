@@ -13,9 +13,9 @@ import (
 )
 
 func TestPostItem(t *testing.T) {
-	ints := make([]int, 240, 240)
-	sellerIds := make([]int, 240, 240)
-	names := make([]string, 240, 240)
+	ints := make([]int, 240)
+	sellerIds := make([]int, 240)
+	names := make([]string, 240)
 	for i := range ints {
 		ints[i] = rand.Intn(maxInt) + 1
 		sellerIds[i] = rand.Intn(999999-111111+1) + 111111
@@ -37,7 +37,7 @@ func TestPostItem(t *testing.T) {
 		payload map[string]interface{}
 	}{
 		{
-			"Создание объявления с латиницей в названии и положительными числовыми полями",
+			"Создание объявления с латиницей в названии и положительными числовыми полями", // падает в силу бага BR-1
 			map[string]interface{}{
 				"sellerID":   sellerIds[0],
 				"name":       names[0],
@@ -46,7 +46,7 @@ func TestPostItem(t *testing.T) {
 			},
 		},
 		{
-			"Создание объявления с кириллицей в названии",
+			"Создание объявления с кириллицей в названии", // падает в силу бага BR-1
 			map[string]interface{}{
 				"sellerID":   sellerIds[1],
 				"name":       names[1],
@@ -55,7 +55,7 @@ func TestPostItem(t *testing.T) {
 			},
 		},
 		{
-			"Создание объявления с числовой строкой в названии",
+			"Создание объявления с числовой строкой в названии", // падает в силу бага BR-1
 			map[string]interface{}{
 				"sellerID":   sellerIds[2],
 				"name":       names[2],
@@ -64,7 +64,7 @@ func TestPostItem(t *testing.T) {
 			},
 		},
 		{
-			"Создание объявления с названием в верхнем регистре",
+			"Создание объявления с названием в верхнем регистре", // падает в силу бага BR-1
 			map[string]interface{}{
 				"sellerID":   sellerIds[3],
 				"name":       names[3],
@@ -73,7 +73,7 @@ func TestPostItem(t *testing.T) {
 			},
 		},
 		{
-			"Создание объявления с именем, содержащим пробелы",
+			"Создание объявления с именем, содержащим пробелы", // падает в силу бага BR-1
 			map[string]interface{}{
 				"sellerID":   sellerIds[4],
 				"name":       names[4],
@@ -82,7 +82,7 @@ func TestPostItem(t *testing.T) {
 			},
 		},
 		{
-			"Создание объявления с именем, содержащим спец.символы",
+			"Создание объявления с именем, содержащим спец.символы", // падает в силу бага BR-1
 			map[string]interface{}{
 				"sellerID":   sellerIds[5],
 				"name":       names[5],
@@ -91,7 +91,7 @@ func TestPostItem(t *testing.T) {
 			},
 		},
 		{
-			"Создание объявления с именем, содержащим эмодзи",
+			"Создание объявления с именем, содержащим эмодзи", // падает в силу бага BR-1
 			map[string]interface{}{
 				"sellerID":   sellerIds[6],
 				"name":       names[6],
@@ -100,7 +100,7 @@ func TestPostItem(t *testing.T) {
 			},
 		},
 		{
-			"Создание объявления с именем, содержащим только пробелы",
+			"Создание объявления с именем, содержащим только пробелы", // падает в силу бага BR-1
 			map[string]interface{}{
 				"sellerID":   sellerIds[7],
 				"name":       names[7],
@@ -109,7 +109,7 @@ func TestPostItem(t *testing.T) {
 			},
 		},
 		{
-			"Создание объявления с именем содержащим диакретические символы",
+			"Создание объявления с именем содержащим диакретические символы", // падает в силу бага BR-1
 			map[string]interface{}{
 				"sellerID":   sellerIds[8],
 				"name":       names[8],
@@ -118,7 +118,7 @@ func TestPostItem(t *testing.T) {
 			},
 		},
 		{
-			"Создание объявления с именем содержащим эскейп-последовательности",
+			"Создание объявления с именем содержащим эскейп-последовательности", // падает в силу бага BR-1
 			map[string]interface{}{
 				"sellerID":   sellerIds[9],
 				"name":       names[9],
@@ -127,7 +127,7 @@ func TestPostItem(t *testing.T) {
 			},
 		},
 		{
-			"Создание объявления с именем длиной в 1 символ",
+			"Создание объявления с именем длиной в 1 символ", // падает в силу бага BR-1
 			map[string]interface{}{
 				"sellerID":   sellerIds[10],
 				"name":       names[10][:1],
@@ -136,7 +136,7 @@ func TestPostItem(t *testing.T) {
 			},
 		},
 		{
-			"Создание объявления, в числовых полях нижняя граница положительных чисел",
+			"Создание объявления, в числовых полях нижняя граница положительных чисел", // падает в силу бага BR-1
 			map[string]interface{}{
 				"sellerID":   1,
 				"name":       "positive lower bound",
@@ -145,7 +145,7 @@ func TestPostItem(t *testing.T) {
 			},
 		},
 		{
-			"Создание объявления, в числовых полях верхняя граница int",
+			"Создание объявления, в числовых полях верхняя граница int", // падает в силу бага BR-1
 			map[string]interface{}{
 				"sellerID":   maxInt,
 				"name":       "positive upper bound",
@@ -154,7 +154,7 @@ func TestPostItem(t *testing.T) {
 			},
 		},
 		{
-			"Создание объявления, значение 0 в числовых полях",
+			"Создание объявления, значение 0 в числовых полях", // падает в силу багов BR-4, BR-5, BR-6, BR-7, BR-8
 			map[string]interface{}{
 				"sellerID":   0,
 				"name":       "zero",
@@ -163,7 +163,7 @@ func TestPostItem(t *testing.T) {
 			},
 		},
 		{
-			"Создание объявления, JSON с дополнительными полями",
+			"Создание объявления, JSON с дополнительными полями", // падает в силу бага BR-1
 			map[string]interface{}{
 				"sellerID":       sellerIds[11],
 				"name":           names[11],
@@ -176,7 +176,7 @@ func TestPostItem(t *testing.T) {
 			},
 		},
 		{
-			"Создание объявления, поля JSON дублируются в разных регистрах",
+			"Создание объявления, поля JSON дублируются в разных регистрах", // падает в силу бага BR-1
 			map[string]interface{}{
 				"sellerID":   sellerIds[13],
 				"name":       names[13],
@@ -189,7 +189,7 @@ func TestPostItem(t *testing.T) {
 			},
 		},
 		{
-			"Создание объявления, поля JSON дублируются в разных регистрах c разными типами данных",
+			"Создание объявления, поля JSON дублируются в разных регистрах c разными типами данных", // падает в силу бага BR-1
 			map[string]interface{}{
 				"sellerID":   sellerIds[15],
 				"name":       names[15],
@@ -209,7 +209,7 @@ func TestPostItem(t *testing.T) {
 	}{
 
 		{
-			"Создание объявления, значение -1 в sellerID",
+			"Создание объявления, значение -1 в sellerID", // падает в силу бага BR-9
 			map[string]interface{}{
 				"sellerID":   -1,
 				"name":       names[20],
@@ -219,7 +219,7 @@ func TestPostItem(t *testing.T) {
 			400,
 		},
 		{
-			"Создание объявления, значение -1 в price",
+			"Создание объявления, значение -1 в price", // падает в силу бага BR-10
 			map[string]interface{}{
 				"sellerID":   sellerIds[21],
 				"name":       names[21],
@@ -229,7 +229,7 @@ func TestPostItem(t *testing.T) {
 			400,
 		},
 		{
-			"Создание объявления, значение -1 в likes",
+			"Создание объявления, значение -1 в likes", // падает в силу бага BR-11
 			map[string]interface{}{
 				"sellerID":   sellerIds[22],
 				"name":       names[22],
@@ -239,7 +239,7 @@ func TestPostItem(t *testing.T) {
 			400,
 		},
 		{
-			"Создание объявления, значение -1 в viewCount",
+			"Создание объявления, значение -1 в viewCount", // падает в силу бага BR-12
 			map[string]interface{}{
 				"sellerID":   sellerIds[23],
 				"name":       names[23],
@@ -249,7 +249,7 @@ func TestPostItem(t *testing.T) {
 			400,
 		},
 		{
-			"Создание объявления, значение -1 в contacts",
+			"Создание объявления, значение -1 в contacts", // падает в силу бага BR-13
 			map[string]interface{}{
 				"sellerID":   sellerIds[24],
 				"name":       names[24],
@@ -405,7 +405,7 @@ func TestPostItem(t *testing.T) {
 			400,
 		},
 		{
-			"Создание объявления, поля JSON в разных регистрах",
+			"Создание объявления, поля JSON в разных регистрах", // падает в силу бага BR-3
 			map[string]interface{}{
 				"sEllerId":   sellerIds[40],
 				"NaMe":       names[40],
@@ -499,7 +499,7 @@ func TestPostItem(t *testing.T) {
 			map[string]interface{}{
 				"sellerID":   sellerIds[49],
 				"name":       names[49],
-				"price":      float64(ints[212]),
+				"price":      1.5,
 				"statistics": map[string]int{"likes": ints[213], "viewCount": ints[214], "contacts": ints[215]},
 			},
 			400,
@@ -510,7 +510,7 @@ func TestPostItem(t *testing.T) {
 				"sellerID":   sellerIds[50],
 				"name":       names[50],
 				"price":      ints[216],
-				"statistics": map[string]interface{}{"likes": float64(ints[217]), "viewCount": ints[218], "contacts": ints[219]},
+				"statistics": map[string]interface{}{"likes": 1.5, "viewCount": ints[218], "contacts": ints[219]},
 			},
 			400,
 		},

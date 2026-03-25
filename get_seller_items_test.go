@@ -147,7 +147,7 @@ func TestGetItemsBySeller(t *testing.T) {
 		assert.Equal(t, http.StatusBadRequest, resp.StatusCode)
 	})
 
-	t.Run("Получение объявлений продавца с sellerID=-1", func(t *testing.T) {
+	t.Run("Получение объявлений продавца с sellerID=-1", func(t *testing.T) { // падает в силу бага BR-9
 		resp, err := http.Get(baseURL + "/api/1/-1/item")
 		require.NoError(t, err)
 		defer resp.Body.Close()
